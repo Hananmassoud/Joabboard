@@ -20,7 +20,6 @@ class AiCvMatchController extends Controller
             'cv_text' => $data['cv_text'],
         ]);
 
-        // Ensure API response is JSON only with the exact keys requested.
         return response()->json([
             'job_field' => $result['job_field'],
             'relevant_experience_years' => $result['relevant_experience_years'],
