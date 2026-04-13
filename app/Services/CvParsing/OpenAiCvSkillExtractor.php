@@ -38,8 +38,6 @@ class OpenAiCvSkillExtractor
             return ['skills' => [], 'normalized' => []];
         }
 
-        // Keep enough context to catch skills in different sections (tools, projects, experience).
-        // If CV is extremely long, we cut it to avoid huge API calls.
         if (mb_strlen($cvText) > 24000) {
             $cvText = mb_substr($cvText, 0, 24000);
         }
@@ -77,7 +75,6 @@ class OpenAiCvSkillExtractor
         $payload = [
             'model' => $model,
             'messages' => $messages,
-            // Groq chat completions support response_format json_object.
             'response_format' => ['type' => 'json_object'],
             'temperature' => 0.0,
             'max_tokens' => 1200,
