@@ -13,9 +13,6 @@ class OpenAiRecruitmentMatcher
     {
     }
 
-    /**
-     * @return array{skills_match:int,experience_match:int,education_match:int,projects_match:int,overall_match:int,summary:?string}
-     */
     public function score(Job $job, string $cvText): array
     {
         $apiKey = (string) Config::get('services.groq.api_key');
@@ -36,7 +33,6 @@ class OpenAiRecruitmentMatcher
             $skills = $this->deriveSkillsFromJobText($job->title . "\n" . $job->description);
         }
 
-        // Keep payload bounded: CVs can be very long.
         $cvText = trim($cvText);
         if (mb_strlen($cvText) > 12000) {
             $cvText = mb_substr($cvText, 0, 12000);
@@ -52,7 +48,6 @@ class OpenAiRecruitmentMatcher
             'description' => $job->description,
         ];
 
-        // Deterministic hint so the model sees concrete differences between CVs (reduces "same score for everyone").
         $skillHint = $this->buildSkillOverlapHint($skills, $cvText);
 
         $messages = [
@@ -86,7 +81,6 @@ class OpenAiRecruitmentMatcher
             'model' => $model,
             'messages' => $messages,
             'response_format' => ['type' => 'json_object'],
-            // Slightly higher temperature helps avoid identical scores across different CVs when the model is over-cautious.
             'temperature' => 0.45,
             'max_tokens' => 500,
         ];

@@ -33,17 +33,12 @@ class ProcessApplicationAiMatch implements ShouldQueue
         OpenAiCvSkillExtractor $skillExtractor
     ): void
     {
-        // This job runs AI processing for a single job application:
-        // - Extract CV text from PDF
-        // - Extract skills list from CV
-        // - Calculate match scores for the job vs candidate
         $application = Application::with('job')->find($this->applicationId);
         if (! $application) {
             return;
         }
 
         if (! $application->cv_path) {
-            // If no CV exists, we cannot do AI matching.
             $application->forceFill([
                 'ai_status' => 'failed',
                 'ai_error' => 'No CV file was uploaded for this application.',
@@ -52,24 +47,20 @@ class ProcessApplicationAiMatch implements ShouldQueue
             return;
         }
 
-        // Mark as processing so UI can show status.
         $application->forceFill([
             'ai_status' => 'processing',
             'ai_error' => null,
         ])->save();
 
         try {
-            // 1) Extract readable text from the uploaded CV PDF.
             $cvText = $extractor->extractFromPublicDiskPath($application->cv_path);
 
             if ($cvText === '') {
                 throw new \RuntimeException('Could not extract text from PDF (empty output).');
             }
 
-            // 2) Extract a detailed skills list from the CV (AI-powered).
             $extractedSkills = $skillExtractor->extract($cvText);
 
-            // 3) Choose the matching engine (deterministic or AI) from config.
             $engine = (string) Config::get('services.matching.engine', 'deterministic');
             $scores = match ($engine) {
                 'openai' => $openAi->score($application->job, $cvText),
@@ -77,7 +68,6 @@ class ProcessApplicationAiMatch implements ShouldQueue
                 default => $deterministic->score($application->job, $cvText),
             };
 
-            // Save results so the company can view them without recalculating every page load.
             $updates = [
                 'cv_text' => $cvText,
                 'ai_extracted_skills' => $extractedSkills,
@@ -91,7 +81,6 @@ class ProcessApplicationAiMatch implements ShouldQueue
                 'ai_processed_at' => now(),
             ];
 
-            // Prevent crashes if a deployment hasn't run DB migrations yet.
             if (Schema::hasColumn('applications', 'ai_job_field')) {
                 $updates['ai_job_field'] = $scores['job_field'] ?? null;
             }
@@ -101,7 +90,6 @@ class ProcessApplicationAiMatch implements ShouldQueue
 
             $application->forceFill($updates)->save();
         } catch (\Throwable $e) {
-            // If AI fails, we store the error message so the UI can show "Failed" with reason.
             Log::warning('AI match failed for application', [
                 'application_id' => $application->id,
                 'job_id' => $application->job_id,
@@ -113,8 +101,6 @@ class ProcessApplicationAiMatch implements ShouldQueue
                 'ai_error' => $e->getMessage(),
                 'ai_processed_at' => now(),
             ])->save();
-            // Do not rethrow: AI failures should not break the application flow.
-            // The error is persisted on the application record for admins/companies to review.
             return;
         }
     }

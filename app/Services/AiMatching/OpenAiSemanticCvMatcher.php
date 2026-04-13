@@ -12,22 +12,8 @@ class OpenAiSemanticCvMatcher
     {
     }
 
-    /**
-     * @param  array{job_description:string,cv_text:string}  $input
-     * @return array{
-     *   job_field:string,
-     *   relevant_experience_years:float,
-     *   skills_match:int,
-     *   experience_match:int,
-     *   education_match:int,
-     *   projects_match:int,
-     *   overall_match:int,
-     *   reasoning:string
-     * }
-     */
     public function match(array $input): array
     {
-        // Groq OpenAI-compatible chat completions — semantic CV vs job scoring.
         $apiKey = (string) Config::get('services.groq.api_key');
         if ($apiKey === '') {
             throw new \RuntimeException('GROQ_API_KEY is not configured.');
@@ -44,7 +30,6 @@ class OpenAiSemanticCvMatcher
             throw new \InvalidArgumentException('job_description and cv_text are required.');
         }
 
-        // Keep payload sizes limited so the API call stays fast and reliable.
         if (mb_strlen($jobDescription) > 12000) {
             $jobDescription = mb_substr($jobDescription, 0, 12000);
         }
@@ -90,7 +75,6 @@ class OpenAiSemanticCvMatcher
         $payload = [
             'model' => $model,
             'messages' => $messages,
-            // Groq supports response_format json_object for structured JSON output.
             'response_format' => ['type' => 'json_object'],
             'temperature' => 0.2,
             'max_tokens' => 700,

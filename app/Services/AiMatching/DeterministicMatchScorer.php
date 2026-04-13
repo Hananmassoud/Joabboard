@@ -3,16 +3,8 @@
 namespace App\Services\AiMatching;
 
 use App\Models\Job;
-
-/**
- * Rule-based, fully deterministic matcher: same job + same CV text ⇒ same scores.
- * Overall = weighted blend of: skills, experience, education, projects.
- */
 class DeterministicMatchScorer
 {
-    /**
-     * @return array{skills_match:int,experience_match:int,education_match:int,projects_match:int,overall_match:int,summary:string}
-     */
     public function score(Job $job, string $cvText): array
     {
         $wSkills = (float) config('services.matching.weight_skills', 0.4);
