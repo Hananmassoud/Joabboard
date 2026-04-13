@@ -1,0 +1,16 @@
+{
+  "name": "Job Board",
+  "short_name": "Job Board",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#fb246a",
+  "icons": [
+    {
+      "src": "/assets/img/logo/app-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
