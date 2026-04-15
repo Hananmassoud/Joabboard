@@ -11,6 +11,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobFavouriteController;
 use App\Models\Application;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +32,9 @@ Route::get('/', function () {
     // If the logged-in user is an applicant, we also load their saved (favourite) jobs
     // so the UI can highlight them (example: heart icon).
     $favouriteJobIds = [];
-    if (auth()->check() && auth()->user()->isApplicant()) {
-        $favouriteJobIds = auth()->user()->favouriteJobs()->get()->pluck('id')->all();
+    $user = auth()->user();
+    if ($user instanceof User && $user->isApplicant()) {
+        $favouriteJobIds = $user->favouriteJobs()->get()->pluck('id')->all();
     }
 
     return view('index', compact('jobs', 'favouriteJobIds'));
@@ -80,11 +82,11 @@ Route::middleware('auth')->group(function () {
         $user = auth()->user();
 
         // Redirect users to the correct dashboard based on their role.
-        if ($user && $user->isAdmin()) {
+        if ($user instanceof User && $user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         }
 
-        if ($user && $user->isCompany()) {
+        if ($user instanceof User && $user->isCompany()) {
             return redirect()->route('company.jobs.index');
         }
 
@@ -94,7 +96,7 @@ Route::middleware('auth')->group(function () {
         $recentApplications = collect();
         $availableJobsCount = 0;
         $pendingApplicationsCount = 0;
-        if ($user && $user->isApplicant()) {
+        if ($user instanceof User && $user->isApplicant()) {
             // Dashboard lists only jobs the applicant saved (favourites) from the job board / home.
             $jobs = $user->favouriteJobs()
                 ->with('company')
