@@ -632,8 +632,9 @@
 }
 
 .jb-dashboard-container {
-  padding-top: clamp(1.75rem, 4vw, 2.85rem);
-  padding-bottom: clamp(2.25rem, 5vw, 3.75rem);
+  /* Dashboards looked too tall; keep spacing but make it tighter */
+  padding-top: clamp(1.25rem, 3vw, 2.1rem);
+  padding-bottom: clamp(1.5rem, 3.5vw, 2.65rem);
 }
 
 .applicant-dash-header {
@@ -641,19 +642,19 @@
   border: 1px solid #e2e8f0;
   background: #fff;
   box-shadow: var(--jb-shadow-panel);
-  padding: 1.75rem 1.5rem;
+  padding: 1.35rem 1.25rem;
 }
 
 @media (min-width: 768px) {
   .applicant-dash-header {
-    padding: 2rem 2.25rem;
+    padding: 1.6rem 1.75rem;
   }
 }
 
 .applicant-dash-header-inner {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.05rem;
 }
 
 @media (min-width: 992px) {
@@ -661,7 +662,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 }
 
@@ -827,8 +828,8 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.15rem;
+  margin-bottom: 1.05rem;
+  padding-bottom: 0.9rem;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -864,7 +865,7 @@
   display: flex;
   align-items: stretch;
   gap: 1rem;
-  padding: 1.35rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -2350,19 +2351,19 @@ a.company-logo-sm {
   border: 1px solid #e2e8f0;
   background: #fff;
   box-shadow: 0 12px 48px rgba(15, 23, 42, 0.07);
-  padding: 1.75rem 1.5rem 1.5rem;
+  padding: 1.35rem 1.25rem 1.15rem;
 }
 
 @media (min-width: 768px) {
   .company-dash-hero {
-    padding: 2rem 2rem 1.75rem;
+    padding: 1.65rem 1.6rem 1.4rem;
   }
 }
 
 .company-dash-hero-inner {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.05rem;
 }
 
 @media (min-width: 992px) {
@@ -2637,8 +2638,8 @@ a.company-logo-sm {
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.15rem;
+  margin-bottom: 1.05rem;
+  padding-bottom: 0.9rem;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -2687,7 +2688,7 @@ a.company-logo-sm {
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
-  padding: 1rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -2779,7 +2780,7 @@ a.company-logo-sm {
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.25rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
