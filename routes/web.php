@@ -29,9 +29,9 @@ Route::get('/', function () {
     // Home page shows latest jobs posted by companies.
     $jobs = Job::with('company')->latest()->take(6)->get();
 
-    // If the logged-in user is an applicant, we also load their saved (favourite) jobs
-    // so the UI can highlight them (example: heart icon).
+    // If logged in as applicant, load saved job ids so UI can highlight them.
     $favouriteJobIds = [];
+    /** @var \App\Models\User|null $user */
     $user = auth()->user();
     if ($user instanceof User && $user->isApplicant()) {
         $favouriteJobIds = $user->favouriteJobs()->get()->pluck('id')->all();
@@ -55,16 +55,10 @@ Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
 
 Route::middleware('guest')->group(function () {
-    // Applicant registration page (has role switcher).
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-
-    // Company registration page (all company fields on one screen).
     Route::get('/register/company', [AuthController::class, 'showCompanyRegisterForm'])->name('register.company');
-
-    // Single POST endpoint handles both applicant + company registration.
     Route::post('/register', [AuthController::class, 'register']);
 
-    // Login pages.
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 
@@ -75,13 +69,12 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // Logout destroys the user session.
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', function () {
+        /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
-        // Redirect users to the correct dashboard based on their role.
         if ($user instanceof User && $user->isAdmin()) {
             return redirect()->route('admin.dashboard');
         }
@@ -90,7 +83,7 @@ Route::middleware('auth')->group(function () {
             return redirect()->route('company.jobs.index');
         }
 
-        // Applicant dashboard (summary + saved jobs).
+        // Applicants should see jobs posted by registered companies.
         $jobs = null;
         $appliedJobsCount = 0;
         $recentApplications = collect();
@@ -125,13 +118,10 @@ Route::middleware('auth')->group(function () {
 
     // Company panel
     Route::prefix('company')->name('company.')->group(function () {
-        // Company can view and manage their posted jobs.
         Route::get('/jobs', [CompanyJobController::class, 'index'])->name('jobs.index');
         Route::get('/jobs/create', [CompanyJobController::class, 'create'])->name('jobs.create');
         Route::post('/jobs', [CompanyJobController::class, 'store'])->name('jobs.store');
         Route::delete('/jobs/{job}', [CompanyJobController::class, 'destroy'])->name('jobs.destroy');
-
-        // Company can review applications for a specific job.
         Route::get('/jobs/{job}/applications', [CompanyJobController::class, 'applications'])->name('jobs.applications');
         Route::get('/jobs/{job}/applications/{application}/ai', [CompanyJobController::class, 'applicationAiStatus'])->name('jobs.applications.ai');
         Route::post('/jobs/{job}/applications/{application}/ai/rerun', [CompanyJobController::class, 'rerunApplicationAi'])->name('jobs.applications.ai.rerun');
