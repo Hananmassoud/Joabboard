@@ -622,7 +622,8 @@
 
 /* Applicant dashboard — full professional layout */
 .applicant-dashboard-page {
-  min-height: 70vh;
+  /* Avoid forcing extra empty space when content is short */
+  min-height: 0;
   background: linear-gradient(180deg, #f0f4fb 0%, #f8fafc 38%, #ffffff 100%);
 }
 
@@ -2287,13 +2288,15 @@ a.company-logo-sm {
 
 /* Company dashboard — professional employer workspace */
 .company-dashboard-page {
-  min-height: 70vh;
+  /* Avoid forcing extra empty space when content is short */
+  min-height: 0;
   background: linear-gradient(185deg, #eef2f9 0%, #f4f7fc 35%, #ffffff 100%);
 }
 
 /* Company sub-pages (applications, post job) */
 .company-panel-page {
-  min-height: 65vh;
+  /* Keep pages compact if they have little content */
+  min-height: 0;
   background: linear-gradient(185deg, #eef2f9 0%, #f4f7fc 38%, #ffffff 100%);
 }
 
