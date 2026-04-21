@@ -2160,11 +2160,23 @@ a.company-logo-sm {
 /* Admin panel */
 .admin-panel {
   background: linear-gradient(180deg, #eef2f9 0%, #f6f8fc 35%, #f8fafc 100%);
-  min-height: 65vh;
+  /* Avoid forced empty space when content is short */
+  min-height: 0;
 }
 
 .admin-panel > .container {
   max-width: 1180px;
+}
+
+/* Admin dashboard: tighter vertical rhythm than applicant/company dashboards */
+.admin-panel .jb-stack-row {
+  margin-top: 1.1rem;
+}
+
+@media (min-width: 992px) {
+  .admin-panel .jb-stack-row--loose {
+    margin-top: 1.35rem;
+  }
 }
 
 .admin-panel .alert {
@@ -2184,7 +2196,7 @@ a.company-logo-sm {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: var(--jb-radius-card);
-  padding: 1.35rem 1.5rem;
+  padding: 1.05rem 1.15rem;
   box-shadow: var(--jb-shadow-soft);
   height: 100%;
 }
@@ -2209,8 +2221,14 @@ a.company-logo-sm {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: var(--jb-radius-panel);
-  padding: var(--jb-pad-panel-lg);
+  padding: var(--jb-pad-panel);
   box-shadow: var(--jb-shadow-panel);
+}
+
+@media (min-width: 768px) {
+  .admin-card {
+    padding: var(--jb-pad-panel-lg);
+  }
 }
 
 .admin-card-title {
