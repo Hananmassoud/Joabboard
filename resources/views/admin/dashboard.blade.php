@@ -200,16 +200,16 @@
         </div>
 
         <div class="row jb-stack-row jb-stack-row--loose">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 col-lg-3 mb-3">
                 <a href="{{ route('admin.companies.index') }}" class="btn head-btn2 btn-block w-100">Manage companies</a>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 col-lg-3 mb-3">
                 <a href="{{ route('admin.jobs.index') }}" class="btn head-btn1 btn-block w-100">Manage all jobs</a>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 col-lg-3 mb-3">
                 <a href="{{ route('admin.contacts.index') }}" class="btn head-btn2 btn-block w-100">Contact messages</a>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-6 col-lg-3 mb-3">
                 <a href="{{ route('admin.feedback.index') }}" class="btn head-btn1 btn-block w-100">Feedback</a>
             </div>
         </div>
