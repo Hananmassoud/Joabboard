@@ -380,6 +380,27 @@
   line-height: 1.1 !important;
 }
 
+/* Admin dashboard: make 6 stat cards fit neatly */
+.admin-stat-card {
+  padding: 14px 14px !important;
+  min-height: 90px;
+}
+
+.admin-stat-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-stat-value {
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.admin-stat-icon {
+  opacity: 0.25;
+}
+
 /* App brand logo — consistent fit (header, footer, splash) */
 .app-logo-wrap {
   display: inline-flex;
