@@ -123,10 +123,16 @@
                             </form>
                         @endif
                     </div>
-                    <p class="company-dash-notify-count mb-3">
-                        <span class="company-dash-badge">{{ $unreadApplicationsCount }}</span>
-                        new notification(s)
-                    </p>
+                    @if($unreadApplicationsCount > 0)
+                        <p class="company-dash-notify-count mb-3">
+                            <span class="company-dash-badge">{{ $unreadApplicationsCount }}</span>
+                            new notification(s)
+                        </p>
+                    @else
+                        <p class="company-dash-notify-count company-dash-notify-count--quiet mb-3">
+                            No new notifications right now.
+                        </p>
+                    @endif
                     <div class="company-notify-list">
                         @forelse($recentApplications as $application)
                             <div class="company-notify-item">
@@ -200,6 +206,7 @@
                         </div>
                     @else
                         <div class="company-dash-empty company-dash-empty--compact">
+                            <i class="fas fa-user-check company-dash-empty-icon mb-2"></i>
                             <p class="text-muted mb-0">Applicant details will show here after the first application.</p>
                         </div>
                     @endif
@@ -225,6 +232,12 @@
                             @if($job->location)<i class="fas fa-map-marker-alt mr-1"></i>{{ $job->location }}@else<span class="text-muted">Location not set</span>@endif
                             @if($job->salary)<span class="company-job-meta-sep">·</span>{{ $job->salary }}@endif
                             <span class="company-job-meta-sep">·</span>Posted {{ $job->created_at->diffForHumans() }}
+                            <span class="company-job-meta-sep">·</span>
+                            @if(($job->applications_count ?? 0) > 0)
+                                <span class="company-job-pill company-job-pill--has">Applicants: {{ $job->applications_count }}</span>
+                            @else
+                                <span class="company-job-pill company-job-pill--none">No applicants yet</span>
+                            @endif
                         </p>
                     </div>
                     <div class="company-job-row-actions">
