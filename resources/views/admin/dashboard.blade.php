@@ -18,49 +18,67 @@
 
         <div class="row mb-4">
             <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Companies</span>
-                    <span class="admin-stat-value">{{ $stats['companies'] }}</span>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Applicants</span>
-                    <span class="admin-stat-value">{{ $stats['applicants'] }}</span>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Jobs posted</span>
-                    <span class="admin-stat-value">{{ $stats['jobs'] }}</span>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Applications</span>
-                    <span class="admin-stat-value">{{ $stats['applications'] }}</span>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Contact messages</span>
-                    <div class="d-flex align-items-baseline flex-wrap">
-                        <span class="admin-stat-value">{{ $stats['contact_messages'] }}</span>
-                        @if(($stats['contact_unread'] ?? 0) > 0)
-                            <span class="badge badge-primary admin-badge-new ml-2">{{ $stats['contact_unread'] }} new</span>
-                        @endif
+                <div class="admin-stat-card admin-stat-card--companies">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Companies</span>
+                        <span class="admin-stat-value">{{ $stats['companies'] }}</span>
                     </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 mb-3">
-                <div class="admin-stat-card">
-                    <span class="admin-stat-label">Feedback</span>
-                    <div class="d-flex align-items-baseline flex-wrap">
-                        <span class="admin-stat-value">{{ $stats['feedback'] ?? 0 }}</span>
-                        @if(($stats['feedback_unread'] ?? 0) > 0)
-                            <span class="badge badge-primary admin-badge-new ml-2">{{ $stats['feedback_unread'] }} new</span>
-                        @endif
+                <div class="admin-stat-card admin-stat-card--applicants">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Applicants</span>
+                        <span class="admin-stat-value">{{ $stats['applicants'] }}</span>
                     </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="admin-stat-card admin-stat-card--jobs">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Jobs posted</span>
+                        <span class="admin-stat-value">{{ $stats['jobs'] }}</span>
+                    </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="admin-stat-card admin-stat-card--applications">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Applications</span>
+                        <span class="admin-stat-value">{{ $stats['applications'] }}</span>
+                    </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-file-alt"></i></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="admin-stat-card admin-stat-card--contacts">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Contact messages</span>
+                        <div class="d-flex align-items-baseline flex-wrap">
+                            <span class="admin-stat-value">{{ $stats['contact_messages'] }}</span>
+                            @if(($stats['contact_unread'] ?? 0) > 0)
+                                <span class="badge badge-primary admin-badge-new ml-2">{{ $stats['contact_unread'] }} new</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="admin-stat-card admin-stat-card--feedback">
+                    <div class="admin-stat-main">
+                        <span class="admin-stat-label">Feedback</span>
+                        <div class="d-flex align-items-baseline flex-wrap">
+                            <span class="admin-stat-value">{{ $stats['feedback'] ?? 0 }}</span>
+                            @if(($stats['feedback_unread'] ?? 0) > 0)
+                                <span class="badge badge-primary admin-badge-new ml-2">{{ $stats['feedback_unread'] }} new</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
                 </div>
             </div>
         </div>
