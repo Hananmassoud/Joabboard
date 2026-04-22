@@ -17,7 +17,7 @@
         @endif
 
         <div class="row mb-4">
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--companies">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Companies</span>
@@ -26,7 +26,7 @@
                     <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--applicants">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Applicants</span>
@@ -35,7 +35,7 @@
                     <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--jobs">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Jobs posted</span>
@@ -44,7 +44,7 @@
                     <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-briefcase"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--applications">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Applications</span>
@@ -53,7 +53,7 @@
                     <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-file-alt"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--contacts">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Contact messages</span>
@@ -67,7 +67,7 @@
                     <div class="admin-stat-icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 mb-3">
+            <div class="col-6 col-md-4 col-lg-2 mb-3">
                 <div class="admin-stat-card admin-stat-card--feedback">
                     <div class="admin-stat-main">
                         <span class="admin-stat-label">Feedback</span>
